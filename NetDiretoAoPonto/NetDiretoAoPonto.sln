@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEbugandoAplicacoes", "DEbu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TratandoExcecoes", "TratandoExcecoes\TratandoExcecoes.csproj", "{FE4B1E3F-A357-4164-BB61-C6520FBFFFF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgramacaoOO", "ProgramacaoOO\ProgramacaoOO.csproj", "{A99650B8-ED0E-4224-876D-021987B63941}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{FE4B1E3F-A357-4164-BB61-C6520FBFFFF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE4B1E3F-A357-4164-BB61-C6520FBFFFF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE4B1E3F-A357-4164-BB61-C6520FBFFFF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A99650B8-ED0E-4224-876D-021987B63941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A99650B8-ED0E-4224-876D-021987B63941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A99650B8-ED0E-4224-876D-021987B63941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A99650B8-ED0E-4224-876D-021987B63941}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
