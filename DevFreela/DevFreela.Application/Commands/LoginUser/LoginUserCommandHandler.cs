@@ -4,7 +4,6 @@ using DevFreela.Core.Services;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +14,6 @@ namespace DevFreela.Application.Commands.LoginUser
     {
         private readonly IAuthService _authService;
         private readonly IUserRepository _userRepository;
-
         public LoginUserCommandHandler(IAuthService authService, IUserRepository userRepository)
         {
             _authService = authService;
@@ -24,17 +22,22 @@ namespace DevFreela.Application.Commands.LoginUser
 
         public async Task<LoginUserViewModel> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var passwordHash = _authService.ComputeSHA256Hash(request.Password);
-            var user = await _userRepository.GetByEmailAndPasswordAsync(request.Email, passwordHash);
+            // Utilizar o mesmo algoritmo para criar o hash dessa senha
+            var passwordHash = _authService.ComputeSha256Hash(request.Password);
 
-            if (user == null){
+            // Buscar no meu banco de dados um User que tenha meu e-mail e minha senha em formato hash
+            var user = await _userRepository.GetUserByEmailAndPasswordAsync(request.Email, passwordHash);
+
+            // Se nao existir, erro no login
+            if (user == null)
+            {
                 return null;
             }
 
+            // Se existir, gero o token usando os dados do usuário
             var token = _authService.GenerateJwtToken(user.Email, user.Role);
-            var loginUserViewModel = new LoginUserViewModel(user.Email, token);
 
-            return loginUserViewModel;
+            return new LoginUserViewModel(user.Email, token);
         }
     }
 }

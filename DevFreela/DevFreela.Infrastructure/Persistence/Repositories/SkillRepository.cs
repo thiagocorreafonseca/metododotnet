@@ -3,10 +3,8 @@ using DevFreela.Core.DTOs;
 using DevFreela.Core.Repositories;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DevFreela.Infrastructure.Persistence.Repositories
@@ -23,16 +21,16 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             using (var sqlConnection = new SqlConnection(_connectionString))
             {
-                var script = "select id, description from skills";
-
                 sqlConnection.Open();
+
+                var script = "SELECT Id, Description FROM Skills";
 
                 var skills = await sqlConnection.QueryAsync<SkillDTO>(script);
 
                 return skills.ToList();
             }
 
-
+            // COM EF CORE
             //var skills = _dbContext.Skills;
 
             //var skillsViewModel = skills

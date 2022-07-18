@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 namespace DevFreela.API.Controllers
 {
     [Route("api/skills")]
-    [Authorize]
     public class SkillsController : ControllerBase
     {
         private readonly IMediator _mediator;
-
         public SkillsController(IMediator mediator)
         {
             _mediator = mediator;

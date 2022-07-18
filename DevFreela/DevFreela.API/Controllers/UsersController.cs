@@ -25,6 +25,7 @@ namespace DevFreela.API.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetUserQuery(id);
+
             var user = await _mediator.Send(query);
 
             if (user == null)
@@ -41,21 +42,23 @@ namespace DevFreela.API.Controllers
         public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
             var id = await _mediator.Send(command);
+
             return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
-        // api/users/1/login
+        // api/users/login
         [HttpPut("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            var loginUserViewModel = await _mediator.Send(command);
+            var loginUserviewModel = await _mediator.Send(command);
 
-            if (loginUserViewModel == null)
+            if (loginUserviewModel == null)
             {
                 return BadRequest();
             }
 
-            return Ok(loginUserViewModel);
+            return Ok(loginUserviewModel);
         }
     }
 }

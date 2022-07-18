@@ -1,9 +1,7 @@
 ﻿using DevFreela.Core.Enums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DevFreela.Core.Entities
 {
@@ -22,8 +20,8 @@ namespace DevFreela.Core.Entities
             Comments = new List<ProjectComment>();
         }
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string Title { get; private set; }
+        public string Description { get; private set; }
         public int IdClient { get; private set; }
         public User Client { get; private set; }
         public int IdFreelancer { get; private set; }
@@ -37,14 +35,19 @@ namespace DevFreela.Core.Entities
 
         public void Cancel()
         {
-            if(Status == ProjectStatusEnum.InProgress)
+            if (Status == ProjectStatusEnum.InProgress || Status == ProjectStatusEnum.InProgress)
             {
                 Status = ProjectStatusEnum.Cancelled;
             }
         }
+        public void PendingPayment()
+        {
+            Status = ProjectStatusEnum.Pending;
+        }
+
         public void Start()
         {
-            if (Status == ProjectStatusEnum.Created || Status == ProjectStatusEnum.Suspended)
+            if (Status == ProjectStatusEnum.Created)
             {
                 Status = ProjectStatusEnum.InProgress;
                 StartedAt = DateTime.Now;
@@ -53,7 +56,7 @@ namespace DevFreela.Core.Entities
 
         public void Finish()
         {
-            if (Status == ProjectStatusEnum.InProgress )
+            if (Status == ProjectStatusEnum.Pending)
             {
                 Status = ProjectStatusEnum.Finished;
                 FinishedAt = DateTime.Now;
@@ -62,7 +65,9 @@ namespace DevFreela.Core.Entities
 
         public void Update(string title, string description, decimal totalCost)
         {
-
+            Title = title;
+            Description = description;
+            TotalCost = totalCost;
         }
     }
 }

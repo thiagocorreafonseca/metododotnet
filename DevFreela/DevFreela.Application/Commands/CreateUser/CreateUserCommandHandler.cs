@@ -11,7 +11,6 @@ namespace DevFreela.Application.Commands.CreateUser
     {
         private readonly DevFreelaDbContext _dbContext;
         private readonly IAuthService _authService;
-
         public CreateUserCommandHandler(DevFreelaDbContext dbContext, IAuthService authService)
         {
             _dbContext = dbContext;
@@ -20,7 +19,8 @@ namespace DevFreela.Application.Commands.CreateUser
 
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var passwordHash = _authService.ComputeSHA256Hash(request.Password);
+            var passwordHash = _authService.ComputeSha256Hash(request.Password);
+
             var user = new User(request.FullName, request.Email, request.BirthDate, passwordHash, request.Role);
 
             await _dbContext.Users.AddAsync(user);
